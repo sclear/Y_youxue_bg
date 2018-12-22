@@ -1,0 +1,45 @@
+.fl{
+    float: left;
+}
+
+.pagin{
+    position: absolute;
+    left:0;
+    margin-top: 100px;
+}
+
+.w200{
+    width:200px !important;
+}
+.icons{
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* model  动画 */
+.modelBody-enter-active{
+    animation: entModel .3s linear  forwards;
+}
+.modelBody-leave-active{
+    animation: leavmodel .3s linear  forwards;    
+}
+@keyframes entModel {
+    0%{
+        /* rigth:-60%; */
+        transform: translate(60%)
+    }
+    100%{
+        transform:  translate(0)
+    }
+}
+@keyframes leavmodel {
+    0%{
+        /* rigth:0%; */
+        transform: translate(0)
+    }
+    100%{
+        /* right:-60%; */
+        transform: translate(60%)
+    }
+}
