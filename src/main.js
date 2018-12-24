@@ -12,7 +12,8 @@ import Element from 'element-ui'
 Vue.use(Element)
 import _globalComponts from './components/global/globalcom'
 Vue.use(_globalComponts)
-
+import plugin from './plugin/plugin'
+Vue.use(plugin)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

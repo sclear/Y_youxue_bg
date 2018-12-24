@@ -9,6 +9,6 @@ export default new Router({
       path: '/',
       component: resolve => require(['@/components/page'], resolve),
       children:[...menu]
-    }
+    },
   ]
 })

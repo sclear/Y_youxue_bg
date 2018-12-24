@@ -12,6 +12,7 @@ _global.install = (Vue)=>{
     Vue.component('jModel',model)
 
 
+
 }
 
 

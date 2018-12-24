@@ -8,10 +8,10 @@ let Imgurl = '';
 let ipUrl  = '';
 
 if(process.env.NODE_ENV === 'development'){
-   Imgurl = 'https://you1mei.com/public/uploads/case/';
+   Imgurl = 'http://tm.you1mei.com';
    ipUrl  = 'http://tm.you1mei.com';
 } else{
-   Imgurl = '/public/uploads/case/';
+   Imgurl = 'http://tm.you1mei.com';
    ipUrl  = 'http://tm.you1mei.com';
 }
  

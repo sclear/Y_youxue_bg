@@ -1,19 +1,27 @@
 export default {
     data() {
         return {
-            list: [],
-            model:false,
-            total: 0,
-            pagesize: 10,
-            nowsize: 1,
+            serch:'',               //第一个搜索框内容
+            list: [],               //table表数据
+            title:'暂无标题',        //model title
+            model:false,            //model状态
+            total: 0,               //分页条数
+            pagesize: 10,           //每页显示条数
+            nowsize: 1,             //当前页码
             tabModel: {},           //model 内容
             disable: false,         //禁止model输入
             add:false,              //分辨添加 和 编辑
         }
     },
     methods: {
+        //开关model
         CLOSE() {
             this.model = !this.model;
-        },  
+        },
+        //分页功能
+        changesize(res) {
+            this.nowsize = res;
+            this.getInfo()
+        } 
     }
 }

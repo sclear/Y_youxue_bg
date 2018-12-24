@@ -61,6 +61,7 @@
             key: 'user_id',
             label: 'user_name'
             }"
+            :titles='titlesName'
             :data="tablist"
           ></el-transfer>
           <el-button class="fs12 upmsg" size="mini" @click="setUser" type="primary">提交</el-button>
@@ -88,22 +89,20 @@
 </template>
 
 <script>
-import _api from "./../../api/baseUrl.js";
-import mixin from "./../../util/mixin.js";
+import _api from "./../../../api/baseUrl.js";
+import mixin from "./../../../util/mixin.js";
 export default {
   mixins: [mixin],
   data() {
     return {
-      serch: "",
-      msg: 3,
       getList: [], //选中的穿梭内容
       bole: true, //穿梭 搜索
       tablist: [], //获取所有信息
-      add: false,
+      // add: false,
       roleList: [],
       value: "",
-      id: ""
-      //   upAdminUser
+      id: "",
+      titlesName:['未注册用户','已注册用户']
     };
   },
   mounted() {
@@ -117,7 +116,6 @@ export default {
         page: this.nowsize
       };
       _api.getAllUser(obj).then(res => {
-        console.log(res);
         this.list = res.data.data.res;
         this.total = res.data.data.long;
       });
@@ -133,7 +131,7 @@ export default {
             for (let j = 0; j < usarr.length; j++) {
               if (tmarr[i].user_id === usarr[j].user_id) {
                 tmarr[i].disabled = true;
-              } else tmarr[i].disabled = false;
+              }
             }
           }
           this.tablist = tmarr;
@@ -156,12 +154,17 @@ export default {
       });
     },
     bindrole() {
-      _api
-        .upAdminUser({
+      _api.upAdminUser({
           user_id: this.id,
           role: this.value
         })
-        .then(res => console.log(res));
+        .then(res => {
+          if(res.status === 200){
+            this.CLOSE()
+            this.getInfo()
+            this.$DIY(res.data.msg)
+          }
+        });
     },
 
     openrole() {
@@ -188,7 +191,12 @@ export default {
     //穿梭内容
     setUser() {
       _api.addAdminUser({ data: this.setList }).then(res => {
-        console.log(res);
+        if(res.status === 200){
+          this.CLOSE()
+          this.getInfo();
+          this.$DIY(res.data.msg)
+        }
+        
       });
       console.log(this.setList);
     }

@@ -13,9 +13,9 @@
 }
 .icons{
     font-size: 16px;
+    margin: auto 5px;
     cursor: pointer;
 }
-
 
 /* model  动画 */
 .modelBody-enter-active{
@@ -24,22 +24,145 @@
 .modelBody-leave-active{
     animation: leavmodel .3s linear  forwards;    
 }
+/* model 抽屉动画 */
 @keyframes entModel {
     0%{
-        /* rigth:-60%; */
-        transform: translate(60%)
+        transform: translateX(720px)
     }
     100%{
-        transform:  translate(0)
+        transform:  translateX(0)
     }
 }
 @keyframes leavmodel {
     0%{
-        /* rigth:0%; */
         transform: translate(0)
     }
     100%{
-        /* right:-60%; */
-        transform: translate(60%)
+        transform: translate(720px)
     }
 }
+
+/* model  动画 */
+.shades-enter-active{
+    animation: shadeIn .3s linear  forwards;
+}
+.shades-leave-active{
+    animation: shadeOut .3s linear  forwards;    
+}
+/* model 抽屉动画 */
+@keyframes shadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes shadeOut {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+
+
+.lookInput>input:disabled { 
+    background: white !important; 
+    border:none;
+    /* color:red !important; */
+}
+
+
+.Z-toast{
+    position: fixed;
+    height:50px;
+    width:200px;
+    top:20%;
+    left:50%;
+    margin-top: -25px;
+    margin-left: -100px;
+    background-color: rgba(0, 0, 0, 0.644);
+    z-index: 999999;
+    border-radius: 7px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    opacity: 0;
+    animation: toast 2s linear;
+}
+@keyframes toast{
+    0%{
+        top:15%;
+    }
+    10%{
+        opacity: 1;
+        top:20%;
+    }
+    80%{
+        opacity: 1;
+        top:20%;
+    }
+    100%{
+        opacity: 0;
+        top: 15%;
+    }
+}
+
+
+
+/* //上传图片的样式 */
+.upBox{
+    margin-top: 10px;
+    overflow: hidden;
+}
+.upBox > div{
+    float: left;
+}
+.img-txt{
+    line-height: 28px;
+    width:70px;
+    text-align: right;
+    color:#535354;
+}
+.img-box{
+    width: 100px;
+    height:28px;
+    border-radius: 5px;
+    border:1px solid #dcdfe6;
+    margin-left: 8px;
+    text-align: center;
+    line-height: 28px;
+    color:#535354;
+    position: relative;
+}
+.img-box>input{
+    opacity: 0;
+    height:100%;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.img-max{
+    margin-top: 10px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+
+
+/* <div class="upBox">
+          <div class="img-txt">广告图片</div>
+          <div>
+            <div class="img-box">上传图片
+              <input type="file">
+            </div>
+            <img src="./../../../assets/logo.png" alt="">
+          </div>
+        </div> */
+
+

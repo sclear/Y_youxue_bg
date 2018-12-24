@@ -1,9 +1,6 @@
 <template>
   <div class="role">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane v-for="(item,index) in sitmap" :key="index" :label="item.label" :name="item.name"></el-tab-pane>
-    </el-tabs>
-     <router-view class="routerV"></router-view>
+    <sitmap :sitmap='sitmap'></sitmap>
   </div>
 </template>
 
@@ -11,41 +8,22 @@
 export default {
   data() {
     return {
-      activeName:'1',
       sitmap:[
         {
           label:'用户管理',
           name:'1',
-          // route:'roledetail'
+          route:'/role/user'
         },
         {
-          label:'用户管理',
+          label:'添加权限',
           name:'2',
-          // route:'home'
+          route:'/role/roledetail'
         },
       ]
     }
-  },
-   methods: {
-    handleClick(tab, event) {
-      console.log(tab.index, event);
-      this.toLIKE(tab.index)
-    },
-    toLIKE(res) {
-      this.$router.push(this.sitmap[res].route)
-    }
-  },
-  components: {
-
   }
 }
 </script>
 
 <style lang='less' scoped >
-.role{
-  // height:100%;
-}
-.routerV{
-  // height:500px;
-}
 </style>

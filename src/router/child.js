@@ -1,14 +1,14 @@
 export default [
     {
         path: '/',
-        redirect: { path:'/user' }
+        redirect: { path:'/role/user' }
     },
     {
-        path: '/user',
-        component: resolve => require(['@/components/role/user'], resolve),
+        path: 'user',
+        component: resolve => require(['@/components/role/children/user'], resolve),
     },
     {
-        path:'/roledetail',
-        component: resolve => require(['@/components/role/roledetail'], resolve),
+        path:'roledetail',
+        component: resolve => require(['@/components/role/children/roledetail'], resolve),
     }
 ]
