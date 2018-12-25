@@ -6,7 +6,7 @@
     <transition name="modelBody">
       <div v-if="model" class="contentBody">
         <div class="head">
-          <i @click="close" class="el-icon-d-arrow-right"></i><span>{{title}}</span>
+          <i @click="close" class="el-icon-close"></i><span>{{title}}</span>
         </div>
         <div class="content">
           <slot name="content"></slot>
@@ -68,7 +68,7 @@ export default {
       i {
         font-size: 20px;
         line-height: 40px;
-        color: @txt;
+        color: #F56C6C;
         cursor: pointer;
         float: left;
       }

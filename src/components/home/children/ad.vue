@@ -6,21 +6,7 @@
     </el-select>
     <!-- <el-button class="fs12" size="mini" type="primary">查询</el-button> -->
     <el-button class="fs12" @click="addAd" size="mini" type="primary">添加广告</el-button>
-    <!-- table -->
-    <el-table class="ELtable" :data="list" style="width: 100%">
-      <el-table-column align="center" prop="user_name" width="50" label="序号">
-        <template slot-scope="scope">{{scope.$index+(nowsize - 1) * pagesize + 1}}</template>
-      </el-table-column>
-      <el-table-column align="center" prop="ad_url" label="案例" width="300" show-overflow-tooltip></el-table-column>
-      <el-table-column align="center" prop="name" label="操作" width="300" show-overflow-tooltip>
-        <template slot-scope="scope">
-          <i @click="changes(scope.$index)" class="el-icon-edit icons"></i>
-          <i @click="del(scope.$index)" class="el-icon-close icons"></i>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 分页 -->
-    <el-pagination
+     <el-pagination
       size="small"
       class="pagin"
       background
@@ -28,7 +14,33 @@
       :current-page="nowsize"
       :page-size="pagesize"
       :total="total"
+      layout="total, sizes, prev, pager, next, jumper"
+       @size-change="handleSizeChange"
+      :page-sizes="[10, 20, 50, 100]"
     ></el-pagination>
+    <!-- table -->
+    <el-table class="ELtable" :data="list" height="400" style="width: 100%">
+      <el-table-column align="center" prop="user_name" width="50" label="序号">
+        <template slot-scope="scope">{{scope.$index+(nowsize - 1) * pagesize + 1}}</template>
+      </el-table-column>
+      <el-table-column align="center" prop="ad_url" label="案例"  show-overflow-tooltip></el-table-column>
+      <el-table-column align="center" prop="name" label="操作"  show-overflow-tooltip>
+        <template slot-scope="scope">
+          <i @click="changes(scope.$index)" class="el-icon-edit icons"></i>
+          <i @click="del(scope.$index)" class="el-icon-close icons"></i>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 分页 -->
+    <!-- <el-pagination
+      size="small"
+      class="pagin"
+      background
+      @current-change="changesize"
+      :current-page="nowsize"
+      :page-size="pagesize"
+      :total="total"
+    ></el-pagination> -->
     <!-- model -->
     <j-model :model="model" @CLOSE="CLOSE" :title="title">
       <div slot="content">

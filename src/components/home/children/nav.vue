@@ -3,15 +3,15 @@
     <el-button class="fs12" @click="addClass(1)" size="mini" type="primary">一级分类</el-button>
     <el-button class="fs12" @click="addClass(2)" size="mini" type="primary">二级分类</el-button>
     <el-button class="fs12" @click="addClass(3)" size="mini" type="primary">三级分类</el-button>
-    <!-- 内容区域  auto scoll -->{{selectThree}}
+    <!-- 内容区域  auto scoll -->
     <div class="continear">
       <div v-for="(item,index) in list" :key="index" class="box">
-        <div @click="changes(item.id)" class="titles cus">{{item.list_name}} <i @click="del(item.id)" class="el-icon-close icons"></i> </div>
+        <div @click="changes(item.id)" class="titles cus" :class="item.list_type===1?'':'danger'">{{item.list_name}} <i title="设置是否在主页显示" @click.stop="changeBg(item)" class="el-icon-setting icons"></i>   <i @click="del(item.id)" class="el-icon-close icons"></i>   </div>
         <div class="spaBtw">
           <div v-for="(items,indexs) in item.children" :key="indexs" class="fl">
-            <div @click="changes(items.id)" class="twoFl cus">{{items.list_name}} <i @click="del(items.id)" class="el-icon-close"></i> </div>
+            <div @click="changes(items.id)" class="twoFl cus">{{items.list_name}} <i @click.stop="del(items.id)" class="el-icon-close"></i> </div>
             <!-- <el-button class="el-btn" size="mini" type="success">{{items.list_name}}</el-button> -->
-            <div @click="changes(itemss.id)" class='twoFl colr cus' v-for="(itemss,indexss) in items.children" :key="indexss">{{itemss.list_name}}  <i  @click="del(itemss.id)" class="el-icon-close"></i></div>
+            <div @click="changes(itemss.id)" class='twoFl colr cus' v-for="(itemss,indexss) in items.children" :key="indexss">{{itemss.list_name}}  <i  @click.stop="del(itemss.id)" class="el-icon-close"></i></div>
             <div>
               <!-- <el-button
                 v-for="(itemss,indexss) in items.children"
@@ -200,14 +200,28 @@ export default {
         .then(res=>{
             if(res.status === 200){
                 this.getInfo()
+                this.$DIY(res.data.msg)
             }
         })
     },
+    //修改
     changes(num) {
         this.title = '修改分类名称';
         this.id = num;
         this.swichNum = 4;
         this.CLOSE()
+    },
+    //设置是否在主页显示
+    changeBg(msg) {
+      _api.upListType({
+        list_type:msg.list_type===1?0:1,
+        id:msg.id
+      }).then(res=>{
+        if(res.status === 200){
+          this.$DIY(res.data.msg);
+          this.getInfo()
+        }
+      })
     }
   },
 
@@ -283,5 +297,8 @@ export default {
 }
 .cus{
     cursor: pointer;
+}
+.danger{
+  background: @danger !important;
 }
 </style>

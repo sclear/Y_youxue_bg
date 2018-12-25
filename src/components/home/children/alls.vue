@@ -64,6 +64,10 @@ export default {
     margin: 40px;
     background: bisque;
     float: left;
+    border-radius: 5px;
+    &>div:nth-child(1){
+      font-size: 17px;
+    }
     div {
       text-align: center;
       margin-top: 15px;

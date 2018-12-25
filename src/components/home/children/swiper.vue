@@ -3,6 +3,15 @@
     <el-input class="w200" size="mini" placeholder="用户名"></el-input>
     <el-button class="fs12" size="mini" type="primary">查询</el-button>
     <el-button class="fs12" @click="addSWIPER" size="mini" type="primary">添加轮播图</el-button>
+    <!-- <el-pagination
+      size="small"
+      class="pagin"
+      background
+      @current-change="changesize"
+      :current-page="nowsize"
+      :page-size="pagesize"
+      :total="total"
+    ></el-pagination> -->
     <!-- table -->
     <el-table class="ELtable" :data="list" style="width: 100%">
       <el-table-column align="center" prop="user_name" width="50" label="序号">
@@ -12,7 +21,6 @@
         align="center"
         prop="banner_url"
         label="地址"
-        width="300"
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column align="center" prop="sort" label="层级" width="300" show-overflow-tooltip></el-table-column>
@@ -20,7 +28,6 @@
         align="center"
         prop="Banner_url"
         label="操作"
-        width="300"
         show-overflow-tooltip
       >
         <template slot-scope="scope">
@@ -30,7 +37,7 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <el-pagination
+    <!-- <el-pagination
       size="small"
       class="pagin"
       background
@@ -38,7 +45,7 @@
       :current-page="nowsize"
       :page-size="pagesize"
       :total="total"
-    ></el-pagination>
+    ></el-pagination> -->
     <!-- model -->
     <j-model :model="model" @CLOSE="CLOSE" :title="title">
       <div slot="content">
@@ -49,7 +56,7 @@
           </div>
           <div class="modelDiv">
             <span>链接地址</span>
-            <el-input v-model="tabModel.url" class="w200" size="mini" placeholder="链接地址"></el-input>
+            <el-input v-model="tabModel.banner_url" class="w200" size="mini" placeholder="链接地址"></el-input>
           </div>
           <div class="modelDiv">
             <span>轮播图片</span>
@@ -84,6 +91,7 @@ export default {
         if (res.status === 200) {
           console.log(res);
           this.list = res.data.data;
+          // this.total = res.data.data.long
         }
       });
     },
@@ -107,7 +115,7 @@ export default {
     //开启修改轮播model
     changes(num) {
       this.title = "修改轮播图";
-      this.tabModel = this.list[num];
+      this.tabModel = JSON.parse(JSON.stringify(this.list[num]));
       console.log(this.tabModel);
       this.add = false;
       this.CLOSE();

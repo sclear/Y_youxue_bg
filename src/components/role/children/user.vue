@@ -3,8 +3,21 @@
     <el-input class="w200" size="mini" v-model="serch" placeholder="用户名"></el-input>
     <el-button class="fs12" size="mini" @click="getInfo" type="primary">查询</el-button>
     <el-button class="fs12" size="mini" @click="sign" type="primary">注册用户</el-button>
+    <!-- <el-input class="w200" v-model="pagesize" size="mini" placeholder="显示数量"></el-input> -->
+    <el-pagination
+      size="small"
+      class="pagin"
+      background
+      @current-change="changesize"
+      :current-page="nowsize"
+      :page-size="pagesize"
+      :total="total"
+      layout="total, sizes, prev, pager, next, jumper"
+      @size-change="handleSizeChange"
+      :page-sizes="[10, 20, 50, 100]"
+    ></el-pagination>
     <!-- table -->
-    <el-table class="ELtable" :data="list" style="width: 100%">
+    <el-table class="ELtable" :data="list" height="400" style="width: 100%">
       <el-table-column align="center" prop="user_name" width="50" label="序号">
         <template slot-scope="scope">{{scope.$index+(nowsize - 1) * pagesize + 1}}</template>
       </el-table-column>
@@ -18,7 +31,7 @@
       ></el-table-column>
       <el-table-column align="center" max-width="300" prop="user_name" label="状态">
         <template slot-scope="scope">
-          <el-button
+          <!-- <el-button
             @click="changeState(scope.$index,0)"
             v-if="scope.row.prohibit === 1"
             class="fs12"
@@ -31,17 +44,23 @@
             class="fs12"
             size="mini"
             type="warning"
-          >否</el-button>
+          >否</el-button> -->
+          <i
+            class="el-icon-check fs12 gou"
+            @click="changeState(scope.$index,0)"
+            v-if="scope.row.prohibit === 1"
+          ></i>
+          <i class="el-icon-close fs12 red" @click="changeState(scope.$index,1)" v-else></i>
         </template>
       </el-table-column>
       <el-table-column align="center" max-width="300" prop="user_name" label="操作">
         <template slot-scope="scope">
-          <i @click="LOOK(scope.$index)" class="el-icon-setting icons"></i>
+          <i @click="LOOK(scope.$index)" class="el-icon-edit icons"></i>
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <el-pagination
+    <!-- <el-pagination
       size="small"
       class="pagin"
       background
@@ -49,8 +68,17 @@
       :current-page="nowsize"
       :page-size="pagesize"
       :total="total"
-    ></el-pagination>
+    ></el-pagination>-->
     <!-- model -->
+    <!-- <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[100, 200, 300, 400]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination>-->
     <j-model :model="model" @CLOSE="CLOSE">
       <div slot="content">
         <div v-if="add">
@@ -61,7 +89,7 @@
             key: 'user_id',
             label: 'user_name'
             }"
-            :titles='titlesName'
+            :titles="titlesName"
             :data="tablist"
           ></el-transfer>
           <el-button class="fs12 upmsg" size="mini" @click="setUser" type="primary">提交</el-button>
@@ -102,7 +130,7 @@ export default {
       roleList: [],
       value: "",
       id: "",
-      titlesName:['未注册用户','已注册用户']
+      titlesName: ["未注册用户", "已注册用户"]
     };
   },
   mounted() {
@@ -142,6 +170,10 @@ export default {
       this.nowsize = res;
       this.getInfo();
     },
+    handleSizeChange(res) {
+      this.pagesize = res;
+      this.getInfo();
+    },
     //settting
     LOOK(res) {
       this.id = this.list[res].user_id;
@@ -154,15 +186,16 @@ export default {
       });
     },
     bindrole() {
-      _api.upAdminUser({
+      _api
+        .upAdminUser({
           user_id: this.id,
           role: this.value
         })
         .then(res => {
-          if(res.status === 200){
-            this.CLOSE()
-            this.getInfo()
-            this.$DIY(res.data.msg)
+          if (res.status === 200) {
+            this.CLOSE();
+            this.getInfo();
+            this.$DIY(res.data.msg);
           }
         });
     },
@@ -191,12 +224,11 @@ export default {
     //穿梭内容
     setUser() {
       _api.addAdminUser({ data: this.setList }).then(res => {
-        if(res.status === 200){
-          this.CLOSE()
+        if (res.status === 200) {
+          this.CLOSE();
           this.getInfo();
-          this.$DIY(res.data.msg)
+          this.$DIY(res.data.msg);
         }
-        
       });
       console.log(this.setList);
     }
@@ -221,6 +253,7 @@ export default {
 
 <style lang='less' scoped >
 .user {
+  overflow: auto;
   .ELtable {
     width: 100% !important;
     margin-top: 15px;
@@ -248,5 +281,15 @@ export default {
 }
 .upset {
   margin-top: 40px;
+}
+.gou{ 
+  color: #67C23A;
+  font-size: 20px;
+  cursor: pointer;
+}
+.red{
+  color: #F56C6C;
+  font-size: 20px;
+  cursor: pointer;
 }
 </style>

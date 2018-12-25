@@ -20,6 +20,6 @@ html,body,#app{
   height:100%;
 }
 .el-table td, .el-table th{
-  padding:4px 0;
+  padding:4px 0 !important;
 }
 </style>

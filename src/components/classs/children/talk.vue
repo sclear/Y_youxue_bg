@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import _api from "./../api/baseUrl.js";
-import mixin from "./../util/mixin.js";
+import _api from "./../../../api/baseUrl.js";
+import mixin from "./../../../util/mixin.js";
 export default {
   mixins: [mixin],
   data() {

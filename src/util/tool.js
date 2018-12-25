@@ -1,3 +1,4 @@
+import _api from './../api/baseUrl'
 const DIYtoast = (value) => {
     let cont = document.createElement('div')
     cont.innerHTML = value
@@ -26,7 +27,15 @@ const toTime = (timestamp, res)=>{
     else if (res === 'h:m:s') return (h + m + ':' + s)
     else return Y + M + D + ' ' + h + m + ':' + s
 }
+
+//上传图片
+const upImg = (event)=>{
+    let fromdata = new FormData();
+    fromdata.append("file", event.target.files[0]);
+    return _api.upload(fromdata)
+}
 export {
     DIYtoast,
     toTime,
+    upImg
 }

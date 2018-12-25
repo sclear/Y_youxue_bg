@@ -1,19 +1,20 @@
 import child from './child'
 export default [
     {
-        path:'/',
-        redirect: { path:'/home' }
+        path: '/',
+        redirect: { path: '/page/home' }
     },
     {
-        path: '/home',
+        path: '/page/home',
         title: '主页',
         icon: 'el-icon-setting',
         component: resolve => require(['@/components/home/home'], resolve),
-        children:[
-            {
-                path: '/',
-                redirect: { path:'/home/alls' }
-            },
+        redirect: { path: '/page/home/alls' },
+        children: [
+            // {
+            //     path: '/',
+            //     redirect: { path:'/page/home/alls' }
+            // },
             {
                 path: 'alls',
                 component: resolve => require(['@/components/home/children/alls'], resolve),
@@ -33,18 +34,83 @@ export default [
         ]
     },
     {
-        path: '/role',
+        path: '/page/role',
         title: '权限管理',
         icon: 'el-icon-setting',
         component: resolve => require(['@/components/role/role'], resolve),
-        children:[...child]
+        redirect: { path: '/page/role/user' },
+        children: [...child]
+    },
+    {
+        path: '/page/member',
+        title: '会员管理',
+        icon: 'el-icon-setting',
+        component: resolve => require(['@/components/member/member'], resolve),
+        redirect: { path: '/page/member/member' },
+        children: [
+            {
+                path: 'member',
+                component: resolve => require(['@/components/member/children/memberd'], resolve),
+
+            }
+        ]
+    },
+    {
+        path: '/page/classs',
+        title: '课程管理',
+        icon: 'el-icon-setting',
+        component: resolve => require(['@/components/classs/classs'], resolve),
+        redirect: { path: '/page/classs/classify' },
+        children: [
+            {
+                path: 'classify',
+                component: resolve => require(['@/components/classs/children/classify'], resolve),
+
+            },
+            {
+                path: 'list',
+                component: resolve => require(['@/components/classs/children/list.vue'], resolve),
+
+            },
+            {
+                path: 'talk',
+                component: resolve => require(['@/components/classs/children/talk'], resolve),
+
+            },
+        ]
+    },
+    {
+        path: '/page/order',
+        title: '订单管理',
+        icon: 'el-icon-setting',
+        component: resolve => require(['@/components/order/order'], resolve),
+        redirect: { path: '/page/order/order' },
+        children: [
+            {
+                path: 'order',
+                component: resolve => require(['@/components/order/children/orderd'], resolve),
+            }
+        ]
+    },
+    {
+        path: '/page/teacher',
+        title: '教师管理',
+        icon: 'el-icon-setting',
+        component: resolve => require(['@/components/teacher/teacher'], resolve),
+        redirect: { path: '/page/teacher/teacher' },
+        children: [
+            {
+                path: 'teacher',
+                component: resolve => require(['@/components/teacher/children/teachers'], resolve),
+            }
+        ]
     },
     {
         path: '/public',
         title: '共有',
         icon: 'el-icon-setting',
         component: resolve => require(['@/components/public'], resolve),
-        children:[
+        children: [
             {
                 path: '/',
                 component: resolve => require(['@/components/anli'], resolve),

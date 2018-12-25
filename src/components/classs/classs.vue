@@ -10,24 +10,19 @@ export default {
     return {
       sitmap:[
         {
-          label:'数据汇总',
+          label:'课程列表',
           name:'1',
-          route:'/page/home/alls'
+          route:'/page/classs/classify'
         },
         {
-          label:'轮播',
+          label:'课程分类',
           name:'2',
-          route:'/page/home/swiper'
+          route:'/page/classs/list'
         },
         {
-          label:'广告',
+          label:'用户评论',
           name:'3',
-          route:'/page/home/ad'
-        },
-        {
-          label:'导航',
-          name:'4',
-          route:'/page/home/nav'
+          route:'/page/classs/talk'
         },
       ]
     }

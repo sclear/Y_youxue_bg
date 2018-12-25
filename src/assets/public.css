@@ -3,9 +3,10 @@
 }
 
 .pagin{
-    position: absolute;
-    left:0;
-    margin-top: 100px;
+    /* position: absolute;
+    left:0; */
+    /* margin-top: 20px; */
+    float: right;
 }
 
 .w200{
@@ -147,14 +148,16 @@
     top:0;
     left:0;
 }
+.Box-img{
+    margin:4px 0 0 5px;
+    max-width: 200px;
+    max-height: 200px;
+}
 .img-max{
     margin-top: 10px;
     max-width: 200px;
     max-height: 200px;
 }
-
-
-
 /* <div class="upBox">
           <div class="img-txt">广告图片</div>
           <div>
@@ -165,4 +168,51 @@
           </div>
         </div> */
 
+/* input框样式 */
+.model-input>span{
+    display: inline-block;
+    width: 72px;
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: 5px;
+    color:#535354;
+}
+/* <div class='model-input'>
+          <span>234</span>
+          <el-input v-model="serch" class="w200" size="mini" placeholder="用户名或手机号"></el-input>
+        </div> */
+
+
+
+/* textarea */
+.textar{
+    overflow: hidden;
+    margin: 5px 0;
+}
+.textar > div{
+    float: left;
+}
+.textar-title{
+    width:70px;
+    text-align: right;
+    margin-right: 5px;
+    color:#535354;
+}
+.textar-content{
+    resize: none;
+    border:1px solid #dcdfe6;
+    border-radius: 5px;
+    width: 400px;
+    height:100px;
+    box-sizing: border-box;
+    padding:10px;
+    color:#535354;
+    font-size: 12px;
+}
+
+
+/* 提交按钮 */
+.upBtn{
+    margin:30px 0 0 80px !important;
+}
 

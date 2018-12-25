@@ -125,8 +125,70 @@ class api  {
     upList(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/upList`,data)
     }
-
-    //
+    //是否显示导航
+    upListType(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/upListType`,data)
+    }
+    //会员列表
+    getMenberUser(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Memberuser/getMenberUser`,data)
+    }
+    //查询购买记录
+    PurchaseRecord(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Memberuser/PurchaseRecord`,data)
+    }
+    //重置用户
+    upMenberUser(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Memberuser/upMenberUser`,data)
+    }
+    //订单管理
+    getAll(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Order/getAll`,data)
+    }
+    //课程分类
+    getCourses(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCourses`,data)
+    }
+    //更改课程推荐状态
+    courseType(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/courseType`,data)
+    }
+    //更新课程数据
+    upCourse(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/upCourse`,data)
+    }
+    //删除课程信息
+    delCourse(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/delCourse`,data)
+    }
+    //上下架课程
+    downCourse(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/downCourse`,data)
+    }
+    //上下架课程
+    addCourse(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/addCourse`,data)
+    }
+    //查询所有教师信息(分页)
+    getTeachers(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/getTeachers`,data)
+    }
+    //id查询教师个人信息
+    getTeacherId(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/getTeacherId`,data)
+    }
+    //更新教师信息
+    upTeacher(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/upTeacher`,data)
+    }
+    //删除教师
+    delTeacher(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/delTeacher`,data)
+    }
+    //添加教师
+    addTeacher(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/addTeacher`,data)
+    }
 }
 
 

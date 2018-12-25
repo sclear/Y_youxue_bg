@@ -3,8 +3,20 @@
     <el-input class="w200" v-model="serch" size="mini" placeholder="权限名称"></el-input>
     <el-button class="fs12" @click="serchBtn" size="mini" type="primary">查询</el-button>
     <el-button class="fs12" @click="addRole" size="mini" type="primary">添加权限</el-button>
+     <el-pagination
+      size="small"
+      class="pagin"
+      background
+      @current-change="changesize"
+      :current-page="nowsize"
+      :page-size="pagesize"
+      :total="total"
+      layout="total, sizes, prev, pager, next, jumper"
+       @size-change="handleSizeChange"
+      :page-sizes="[10, 20, 50, 100]"
+    ></el-pagination>
     <!-- table -->
-    <el-table class="ELtable" :data="list" style="width: 100%">
+    <el-table class="ELtable" :data="list" height="400" style="width: 100%">
       <el-table-column align="center" prop="user_name" width="50" label="序号">
         <template slot-scope="scope">{{scope.$index+(nowsize - 1) * pagesize + 1}}</template>
       </el-table-column>
@@ -22,16 +34,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <!-- 分页 -->
-    <el-pagination
-      size="small"
-      class="pagin"
-      background
-      @current-change="changesize"
-      :current-page="nowsize"
-      :page-size="pagesize"
-      :total="total"
-    ></el-pagination>
+
     <!-- model -->
     <j-model :model="model" @CLOSE="CLOSE" :title="title">
       <div slot="content">
@@ -46,7 +49,7 @@
             <el-checkbox v-model="item.chose">{{item.label}}</el-checkbox>
           </div>
         </div>
-        <el-button @click="upMsg" class="fs12 btn" size="mini" type="primary">提交</el-button>
+        <el-button v-if="!add" @click="upMsg" class="fs12 btn" size="mini" type="primary">提交</el-button>
       </div>
     </j-model>
   </div>
@@ -211,6 +214,7 @@ export default {
     display: inline-block;
     width: 70px;
     margin-right: 10px;
+    color:@txt;
   }
 }
 .btn {
