@@ -121,7 +121,6 @@ export default {
     //上传图片
     upladImg(event) {
       upImg(event).then(res => {
-        console.log(res);
         this.$set(this.tabModel, "teacher_img", res.data.data.path);
       });
     },

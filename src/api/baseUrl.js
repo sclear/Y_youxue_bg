@@ -8,6 +8,10 @@ class api  {
     upload(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/add`,data,1)
     }
+    //上传图片
+    aaa(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/aaa`,data,1)
+    }
     //获取用户信息
     getAdminUser(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Adminuser/getAdminUser`,data)
@@ -147,7 +151,7 @@ class api  {
     }
     //课程分类
     getCourses(data) {
-        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCourses`,data)
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCouTea`,data)
     }
     //更改课程推荐状态
     courseType(data) {
@@ -188,6 +192,26 @@ class api  {
     //添加教师
     addTeacher(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/addTeacher`,data)
+    }
+    //获取教师名称  （勾选）
+    getTeacher(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Teacher/getTeacher`,data)
+    }
+    //获取全部课程 （勾选）
+    getCouName(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCouName`,data)
+    }
+    //查询二级分类接口
+    getLa(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/getLa`,data)
+    }
+    //修改二级分类展示状态接口
+    getHead(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/getHead`,data)
+    }
+    //展示图片写入
+    bindShow(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/bindShow`,data)
     }
 }
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.timeout = 5000;
+// axios.defaults.timeout = 5000;
 axios.interceptors.request.use(config => {
     return config;
 }, error => {
@@ -28,7 +28,19 @@ const fetch = (method, url, data, sum) => {
             method: method,
             url: url,
             data: data,
-            params: data
+            params: data,
+            onUploadProgress: progressEvent => {
+                console.log(999)
+                console.log(progressEvent.loaded)
+                
+                  // var complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
+                  // this.progress = complete
+              }
+
+            // onUploadProgress: function (progressEvent) {
+            //     // 对原生进度事件的处理
+            //   },
+            
         }
     } else {
         obj = {

@@ -10,7 +10,8 @@ export default {
             nowsize: 1,             //当前页码
             tabModel: {},           //model 内容
             disable: false,         //禁止model输入
-            add: false,              //分辨添加 和 编辑
+            add: false,             //分辨添加 和 编辑
+            course_sketchy:'',       //富文本框中的内容(富文本已设置为全局组件 必须！！子组件键名content) 
         }
     },
     methods: {
@@ -33,6 +34,10 @@ export default {
             console.log(122)
             this.nowsize = 1;
             this.getInfo();
+        },
+        //富文本(fn)传入的参数
+        getEditor(res) {
+            this.course_sketchy = res;
         }
     }
 }

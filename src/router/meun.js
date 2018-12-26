@@ -60,7 +60,7 @@ export default [
         title: '课程管理',
         icon: 'el-icon-setting',
         component: resolve => require(['@/components/classs/classs'], resolve),
-        redirect: { path: '/page/classs/classify' },
+        redirect: { path: '/page/classs/list' },
         children: [
             {
                 path: 'classify',
@@ -75,6 +75,11 @@ export default [
             {
                 path: 'talk',
                 component: resolve => require(['@/components/classs/children/talk'], resolve),
+
+            },
+            {
+                path: 'videos',
+                component: resolve => require(['@/components/classs/children/videos'], resolve),
 
             },
         ]

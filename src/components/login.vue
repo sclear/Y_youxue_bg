@@ -1,15 +1,18 @@
 <template>
-  <div class="login">
-      <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif" alt="">
+  <div class='login'>
+      <img src='https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif' alt=''>
   </div>
 </template>
 
 <script>
+// import xl from './../util/xl.js'
 export default {
   data() {
     return {
-
     }
+  },
+  mounted () {
+ 
   },
   components: {
 

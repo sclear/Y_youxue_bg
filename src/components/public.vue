@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import xl from './../util/xl.js'
 export default {
   data() {
     return {
@@ -19,6 +20,8 @@ export default {
   },
   components: {
 
+  },
+  methods: {
   }
 }
 </script>

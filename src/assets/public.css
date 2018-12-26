@@ -88,7 +88,7 @@
     background-color: rgba(0, 0, 0, 0.644);
     z-index: 999999;
     border-radius: 7px;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     line-height: 50px;
     color: white;
@@ -117,17 +117,28 @@
 
 /* //上传图片的样式 */
 .upBox{
-    margin-top: 10px;
+    margin-top: 15px;
     overflow: hidden;
 }
 .upBox > div{
     float: left;
+}
+.upBox img{
+    margin: 5px 0 0 7px;
+    max-width: 200px;
+    max-height:200px;
 }
 .img-txt{
     line-height: 28px;
     width:70px;
     text-align: right;
     color:#535354;
+}
+.img-size{
+    font-size: 12px;
+    line-height:28px;
+    color:#F56C6C;
+    margin-left: 10px;
 }
 .img-box{
     width: 100px;
@@ -166,9 +177,13 @@
             </div>
             <img src="./../../../assets/logo.png" alt="">
           </div>
+          <div class="img-size">建议大小</div>
         </div> */
 
 /* input框样式 */
+.model-input{
+    margin-top: 15px !important;
+}
 .model-input>span{
     display: inline-block;
     width: 72px;
@@ -176,6 +191,7 @@
     box-sizing: border-box;
     padding-right: 5px;
     color:#535354;
+    /* margin-top: 10px; */
 }
 /* <div class='model-input'>
           <span>234</span>
@@ -187,7 +203,7 @@
 /* textarea */
 .textar{
     overflow: hidden;
-    margin: 5px 0;
+    margin: 15px 0;
 }
 .textar > div{
     float: left;
@@ -209,10 +225,29 @@
     color:#535354;
     font-size: 12px;
 }
+/* <div class="textar">
+          <div class="textar-title">教师简介:</div>
+          <div>
+            <textarea v-model="tabModel.teacher_data" class="textar-content"></textarea>
+          </div>
+        </div> */
 
 
 /* 提交按钮 */
 .upBtn{
-    margin:30px 0 0 80px !important;
+    margin:30px 0 50px 80px !important;
 }
 
+
+
+/* 修改滚动条 */
+/* 修改全局scoll样式 */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 16px;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #409eff;
+}
