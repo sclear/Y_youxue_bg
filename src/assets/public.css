@@ -12,6 +12,9 @@
 .w200{
     width:200px !important;
 }
+.w130{
+    width: 130px !important;
+}
 .icons{
     font-size: 16px;
     margin: auto 5px;
@@ -73,7 +76,12 @@
 .lookInput>input:disabled { 
     background: white !important; 
     border:none;
+    cursor:progress;
     /* color:red !important; */
+}
+.lookInput>textarea:disabled {
+    background: white !important; 
+    border:none;
 }
 
 

@@ -8,6 +8,10 @@ class api  {
     upload(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/add`,data,1)
     }
+    //上传视频
+    upvideo(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/video`,data,1)
+    }
     //上传图片
     aaa(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/aaa`,data,1)
@@ -212,6 +216,54 @@ class api  {
     //展示图片写入
     bindShow(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Listname/bindShow`,data)
+    }
+    //后台查询评论(分页)
+    getComment(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Comment/getComment`,data)
+    }
+    //删除评论 
+    delComment(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Comment/delComment`,data)
+    }
+    //查询所有的介绍信息(分页) 
+    getIntroduces(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Introduce/getIntroduces`,data)
+    }
+    //更新相关介绍信息
+    upIntroduce(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Introduce/upIntroduce`,data)
+    }
+    //删除相关介绍信息
+    deIntroduce(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Introduce/deIntroduce`,data)
+    }
+    //添加相关介绍信息
+    addIntroduce(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Introduce/addIntroduce`,data)
+    }
+    //查询试题
+    getItemList(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Itembank/getItemList`,data)
+    }
+    //删除试题
+    delItemBank(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Itembank/delItemBank`,data)
+    }
+    //删除试题
+    addItemBank(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Itembank/addItemBank`,data)
+    }
+    //更新试题
+    upItemBank(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Itembank/upItemBank`,data)
+    }
+    //添加章节并绑定课程id
+    addChapter(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Chapter/addChapter`,data)
+    }
+    //课程id查章节视频
+    getCoursess(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCoursess`,data)
     }
 }
 

@@ -12,7 +12,8 @@ export default new Router({
     },
     {
       path: '/',
-      component: resolve => require(['@/components/login'], resolve)
+      redirect: { path:'/page' }
+      // component: resolve => require(['@/components/login'], resolve)
     },
   ]
 })

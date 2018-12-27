@@ -79,7 +79,7 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
     </el-pagination>-->
-    <j-model :model="model" @CLOSE="CLOSE">
+    <j-model :model="model" :title='title' @CLOSE="CLOSE">
       <div slot="content">
         <div v-if="add">
           <el-transfer
@@ -96,7 +96,7 @@
         </div>
         <div v-if="!add">
           <div class="box">
-            <div>角色绑定:</div>
+            <div class="co">角色绑定:</div>
             <el-select class="sele" v-model="value" placeholder="请选择">
               <el-option
                 size="mini"
@@ -176,6 +176,7 @@ export default {
     },
     //settting
     LOOK(res) {
+      this.title = '编辑用户信息'
       this.id = this.list[res].user_id;
       this.value = this.list[res].role_id;
       this.CLOSE();
@@ -218,6 +219,7 @@ export default {
     },
     //添加用户
     sign() {
+      this.title = '添加用户'
       this.CLOSE();
       this.add = true;
     },
@@ -291,5 +293,8 @@ export default {
   color: #F56C6C;
   font-size: 20px;
   cursor: pointer;
+}
+.co{
+  color:@txt;
 }
 </style>

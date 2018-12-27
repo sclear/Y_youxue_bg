@@ -102,7 +102,7 @@ export default {
       fromdata.append("file", event.target.files[0]);
       _api.upload(fromdata).then(res => {
         console.log(res);
-        this.$set(this.tabModel, "banner", res.data.data.path);
+        this.$set(this.tabModel, "banner", res.data.data.data);
       });
     },
     //开启添加轮播model

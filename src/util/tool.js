@@ -34,8 +34,15 @@ const upImg = (event)=>{
     fromdata.append("file", event.target.files[0]);
     return _api.upload(fromdata)
 }
+//上传视频
+const upVideo = (event)=>{
+    let fromdata = new FormData();
+    fromdata.append("file", event.target.files[0]);
+    return _api.upvideo(fromdata)
+}
 export {
     DIYtoast,
     toTime,
-    upImg
+    upImg,
+    upVideo
 }

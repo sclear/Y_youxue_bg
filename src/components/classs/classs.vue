@@ -19,21 +19,16 @@ export default {
           name:'2',
           route:'/page/classs/classify'
         },
-        // {
-        //   label:'首页展示',
-        //   name:'2',
-        //   route:'/page/classs/list'
-        // },
         {
           label:'用户评论',
           name:'3',
           route:'/page/classs/talk'
         },
-        {
-          label:'上传视频',
-          name:'4',
-          route:'/page/classs/videos'
-        },
+        // {
+        //   label:'上传视频',
+        //   name:'4',
+        //   route:'/page/classs/videos'
+        // },
       ]
     }
   },

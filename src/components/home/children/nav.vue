@@ -2,16 +2,35 @@
   <div class="user">
     <el-button class="fs12" @click="addClass(1)" size="mini" type="primary">一级分类</el-button>
     <el-button class="fs12" @click="addClass(2)" size="mini" type="primary">二级分类</el-button>
-    <el-button class="fs12" @click="addClass(3)" size="mini" type="primary">三级分类</el-button>
+    <!-- <el-button class="fs12" @click="addClass(3)" size="mini" type="primary">三级分类</el-button> -->
     <!-- 内容区域  auto scoll -->
     <div class="continear">
       <div v-for="(item,index) in list" :key="index" class="box">
-        <div @click="changes(item.id)" class="titles cus" :class="item.list_type===1?'':'danger'">{{item.list_name}} <i title="设置是否在主页显示" @click.stop="changeBg(item)" class="el-icon-setting icons"></i>   <i @click="del(item.id)" class="el-icon-close icons"></i>   </div>
+        <div @click="changes(item.id)" class="titles cus" :class="item.list_type===1?'':'danger'">
+          {{item.list_name}}
+          <i
+            title="删除"
+            @click.stop="del(item.id)"
+            class="el-icon-close icons fr da"
+          ></i>
+          <i title="设置是否在主页显示" @click.stop="changeBg(item)" class="el-icon-setting icons fr"></i>
+        </div>
         <div class="spaBtw">
           <div v-for="(items,indexs) in item.children" :key="indexs" class="fl">
-            <div @click="changes(items.id)" class="twoFl cus">{{items.list_name}} <i @click.stop="del(items.id)" class="el-icon-close"></i> </div>
+            <div @click="changes(items.id)" class="twoFl cus">
+              {{items.list_name}}
+              <i @click.stop="del(items.id)" class="el-icon-close"></i>
+            </div>
             <!-- <el-button class="el-btn" size="mini" type="success">{{items.list_name}}</el-button> -->
-            <div @click="changes(itemss.id)" class='twoFl colr cus' v-for="(itemss,indexss) in items.children" :key="indexss">{{itemss.list_name}}  <i  @click.stop="del(itemss.id)" class="el-icon-close"></i></div>
+            <div
+              @click="changes(itemss.id)"
+              class="twoFl colr cus"
+              v-for="(itemss,indexss) in items.children"
+              :key="indexss"
+            >
+              {{itemss.list_name}}
+              <i @click.stop="del(itemss.id)" class="el-icon-close"></i>
+            </div>
             <div>
               <!-- <el-button
                 v-for="(itemss,indexss) in items.children"
@@ -19,7 +38,7 @@
                 class="el-btn"
                 size="mini"
                 type="info"
-              >{{itemss.list_name}}</el-button> -->
+              >{{itemss.list_name}}</el-button>-->
             </div>
           </div>
         </div>
@@ -43,17 +62,28 @@
           <el-input v-model="fl2" class="w200" size="mini" placeholder="分类名称"></el-input>
         </div>
 
-
         <div v-if="swichNum === 3" class="modelBox">
           <span>选择分类:</span>
-          <el-select @change="LD" class="w200" size="mini" v-model="selectTwo" clearable placeholder="请选择">
+          <el-select
+            @change="LD"
+            class="w200"
+            size="mini"
+            v-model="selectTwo"
+            clearable
+            placeholder="请选择"
+          >
             <el-option v-for="item in list" :key="item.id" :label="item.list_name" :value="item.id"></el-option>
           </el-select>
         </div>
         <div v-if="swichNum === 3" class="modelBox">
           <span>选择分类:</span>
           <el-select class="w200" size="mini" v-model="selectThree" clearable placeholder="请选择">
-            <el-option v-for="item in options2" :key="item.id" :label="item.list_name" :value="item.id"></el-option>
+            <el-option
+              v-for="item in options2"
+              :key="item.id"
+              :label="item.list_name"
+              :value="item.id"
+            ></el-option>
           </el-select>
         </div>
         <div v-if="swichNum === 3" class="modelBox">
@@ -67,7 +97,6 @@
         <el-button @click="UP" class="fs12 mar" size="mini" type="primary">提交</el-button>
       </div>
     </j-model>
-    
   </div>
 </template>
 
@@ -81,15 +110,15 @@ export default {
     return {
       swichNum: "",
       options: [],
-      options2:[],
+      options2: [],
       selectOne: "",
-      selectTwo:'',
-      selectThree:'',
-      changeTxt:'', //修改名称字段
-      fl1: '', //分类1名称
-      fl2:'',  //分类2名称
-      fl3:'',  //分类2名称
-      id:'',   //修改时确定ID
+      selectTwo: "",
+      selectThree: "",
+      changeTxt: "", //修改名称字段
+      fl1: "", //分类1名称
+      fl2: "", //分类2名称
+      fl3: "", //分类2名称
+      id: "" //修改时确定ID
     };
   },
   mounted() {
@@ -147,8 +176,8 @@ export default {
               this.$DIY(res.data.msg);
               this.CLOSE();
               this.getInfo();
-              this.fl2 = '';
-              this.selectOne = '';
+              this.fl2 = "";
+              this.selectOne = "";
             }
           });
       }
@@ -164,8 +193,8 @@ export default {
               this.$DIY(res.data.msg);
               this.CLOSE();
               this.getInfo();
-              this.fl3 = '';
-              this.selectThree = '';
+              this.fl3 = "";
+              this.selectThree = "";
             }
           });
       }
@@ -181,47 +210,56 @@ export default {
               this.$DIY(res.data.msg);
               this.CLOSE();
               this.getInfo();
-              this.changeTxt = ''
+              this.changeTxt = "";
             }
           });
       }
     },
     //联动
     LD() {
-        for(let i = 0;i < this.list.length;i++){
-            if(this.selectTwo === this.list[i].id){
-                console.log(this.list[i].children)
-                this.options2 = this.list[i].children
-            }
+      for (let i = 0; i < this.list.length; i++) {
+        if (this.selectTwo === this.list[i].id) {
+          console.log(this.list[i].children);
+          this.options2 = this.list[i].children;
         }
+      }
     },
     del(num) {
-        _api.deList({id:num})
-        .then(res=>{
-            if(res.status === 200){
-                this.getInfo()
-                this.$DIY(res.data.msg)
+      this.$confirm("此操作将永久删除该分类, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          _api.deList({ id: num }).then(res => {
+            if (res.status === 200) {
+              this.getInfo();
+              this.$DIY(res.data.msg);
             }
+          });
         })
+        .catch();
     },
     //修改
     changes(num) {
-        this.title = '修改分类名称';
-        this.id = num;
-        this.swichNum = 4;
-        this.CLOSE()
+      this.title = "修改分类名称";
+      this.id = num;
+      this.swichNum = 4;
+      this.CLOSE();
     },
     //设置是否在主页显示
     changeBg(msg) {
-      _api.upListType({
-        list_type:msg.list_type===1?0:1,
-        id:msg.id
-      }).then(res=>{
-        if(res.status === 200){
-          this.$DIY(res.data.msg);
-          this.getInfo()
-        }
-      })
+      _api
+        .upListType({
+          list_type: msg.list_type === 1 ? 0 : 1,
+          id: msg.id
+        })
+        .then(res => {
+          if (res.status === 200) {
+            this.$DIY(res.data.msg);
+            this.getInfo();
+          }
+        });
     }
   },
 
@@ -237,20 +275,19 @@ export default {
     width: 100%;
     overflow: auto;
     .box {
-      width: 100%;
+      width: 90%;
       margin-top: 80px;
-      //   border: 1px solid @txt;
       border-radius: 5px;
-      padding: 10px;
       box-sizing: border-box;
-      background: rgb(235, 229, 229);
+      border: 1px solid rgb(235, 229, 229);
     }
     .titles {
-      text-align: center;
       height: 30px;
-      background: @bartxt;
       line-height: 30px;
-      color: white;
+      box-sizing: border-box;
+      padding-left: 15px;
+      color: @txt;
+      border-bottom: 1px solid rgb(235, 229, 229);
     }
   }
 }
@@ -268,37 +305,47 @@ export default {
   margin: 30px 0 0 110px;
 }
 .spaBtw {
-  display: flex;
-  justify-content: space-around;
+  // display: flex;
+  // justify-content: space-around;
+  .Both;
   .twoFl {
+    float: left;
+    margin: 10px;
     height: 38px;
     width: 70px;
-    background: #67c23a;
+    background: @bartxt;
     border-radius: 5px;
     margin-top: 5px;
     text-align: center;
-    line-height:38px;
-    color:white;
+    line-height: 38px;
+    color: white;
     position: relative;
-    i{
-        position: absolute;
-        color:white;
-        top:3px;
-        right:3px;
-        cursor: pointer;
+    i {
+      position: absolute;
+      color: white;
+      top: 3px;
+      right: 3px;
+      cursor: pointer;
     }
   }
-  .colr{
-        background: #909399 !important;
-    }
+  .colr {
+    background: #909399 !important;
+  }
   .el-btn {
     margin-top: 5px;
   }
 }
-.cus{
-    cursor: pointer;
+.cus {
+  cursor: pointer;
 }
-.danger{
+.danger {
   background: @danger !important;
 }
+.fr {
+  float: right;
+  margin-top: 4px;
+}
+// .da{
+//   color:#F56C6C;
+// }
 </style>

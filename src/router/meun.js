@@ -7,7 +7,7 @@ export default [
     {
         path: '/page/home',
         title: '主页',
-        icon: 'el-icon-setting',
+        icon: '\ue64e',
         component: resolve => require(['@/components/home/home'], resolve),
         redirect: { path: '/page/home/alls' },
         children: [
@@ -36,7 +36,7 @@ export default [
     {
         path: '/page/role',
         title: '权限管理',
-        icon: 'el-icon-setting',
+        icon: '\ue616',
         component: resolve => require(['@/components/role/role'], resolve),
         redirect: { path: '/page/role/user' },
         children: [...child]
@@ -44,7 +44,7 @@ export default [
     {
         path: '/page/member',
         title: '会员管理',
-        icon: 'el-icon-setting',
+        icon: '\ue643',
         component: resolve => require(['@/components/member/member'], resolve),
         redirect: { path: '/page/member/member' },
         children: [
@@ -58,7 +58,7 @@ export default [
     {
         path: '/page/classs',
         title: '课程管理',
-        icon: 'el-icon-setting',
+        icon: '\ue60c',
         component: resolve => require(['@/components/classs/classs'], resolve),
         redirect: { path: '/page/classs/list' },
         children: [
@@ -87,7 +87,7 @@ export default [
     {
         path: '/page/order',
         title: '订单管理',
-        icon: 'el-icon-setting',
+        icon: '\ue896',
         component: resolve => require(['@/components/order/order'], resolve),
         redirect: { path: '/page/order/order' },
         children: [
@@ -100,7 +100,7 @@ export default [
     {
         path: '/page/teacher',
         title: '教师管理',
-        icon: 'el-icon-setting',
+        icon: '\ue658',
         component: resolve => require(['@/components/teacher/teacher'], resolve),
         redirect: { path: '/page/teacher/teacher' },
         children: [
@@ -111,9 +111,35 @@ export default [
         ]
     },
     {
+        path: '/page/info',
+        title: '资讯管理',
+        icon: '\ue608',
+        component: resolve => require(['@/components/info/info'], resolve),
+        redirect: { path: '/page/info/info' },
+        children: [
+            {
+                path: 'info',
+                component: resolve => require(['@/components/info/children/infos'], resolve),
+            }
+        ]
+    },
+    {
+        path: '/page/test',
+        title: '试题管理',
+        icon: '\ue63a',
+        component: resolve => require(['@/components/test/test'], resolve),
+        redirect: { path: '/page/test/test' },
+        children: [
+            {
+                path: 'test',
+                component: resolve => require(['@/components/test/children/tests'], resolve),
+            }
+        ]
+    },
+    {
         path: '/public',
         title: '共有',
-        icon: 'el-icon-setting',
+        icon: '\ue63a',
         component: resolve => require(['@/components/public'], resolve),
         children: [
             {

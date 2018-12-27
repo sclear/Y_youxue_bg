@@ -9,9 +9,11 @@
       class="menu-opt"
       active-class="chose"
     >
-      <i :class="item.icon"></i>
+      <i class="iconfont">{{item.icon}}</i>
+      <!-- <i class="iconfont">&#xe658;</i> -->
       <span>{{item.title}}</span>
     </router-link>
+
   </div>
 </template>
 
@@ -38,6 +40,7 @@ export default {
     i {
       width: 50px;
       text-align: center;
+      margin:0 15px;
     }
     &:hover {
       color: @bartxt;

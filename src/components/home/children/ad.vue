@@ -140,7 +140,7 @@ export default {
       let fromdata = new FormData();
       fromdata.append("file", event.target.files[0]);
       _api.upload(fromdata).then(res => {
-        this.$set(this.tabModel, "ad", res.data.data.path);
+        this.$set(this.tabModel, "ad", res.data.data.data);
       });
     },
     //添加 修改

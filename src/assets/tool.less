@@ -14,6 +14,7 @@
     font-size: 20px;
 }
 
+
 //clear:both
 .Both{
     &::after{
@@ -31,4 +32,70 @@
 .suc{
     color:@suc;
     cursor: pointer;
+}
+
+
+
+
+// model card  模态框中的卡片
+.model-card{
+    width:690px;
+    padding-bottom: 20px;
+    border:1px solid #dcdfe6;
+    box-sizing: border-box;
+    // border
+    .card-header{
+        width:100%;
+        height:30px;
+        box-sizing: border-box;
+        border-bottom:1px solid #dcdfe6;
+        line-height: 30px;
+        padding-left: 15px;
+        color:@txt;
+        position: relative;
+        i{
+            position:absolute;
+            line-height: 30px;
+            right:15px;
+            color:@danger;
+            .fs20;
+            cursor: pointer;
+        }
+    }
+    .card-body{
+        .Both;
+        .content-body{
+            margin:10px 0 0 10px;
+            float: left;
+            width:216px;
+            height:282px;
+            border:1px solid #dcdfe6;
+            padding:5px;
+            box-sizing: border-box;
+            .model-titles{
+                .Both;
+                .fl{
+                    float: left;
+                }
+                span{
+                    color:@txt;
+                    display: inline-block;
+                    width:69px;
+                    line-height: 30px;
+                    text-align: right;
+                }
+                img{
+                    max-width: 130px;
+                    max-height: 130px;
+                }
+            }
+            .model-upimg{
+                display: inline-block;
+                margin-left: 0px;
+            }
+        }
+    }
+}
+.centers{
+   margin-left: 15px;
 }

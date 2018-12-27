@@ -24,10 +24,9 @@
         align="center"
         prop="role_name"
         label="权限名"
-        width="300"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column align="center" prop="role_name" label="操作" width="300" show-overflow-tooltip>
+      <el-table-column align="center" prop="role_name" label="操作" show-overflow-tooltip>
         <template slot-scope="scope">
           <i @click="changes(scope.$index)" class="el-icon-edit icons"></i>
           <i @click="del(scope.$index)" class="el-icon-close icons"></i>

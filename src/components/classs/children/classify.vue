@@ -47,6 +47,7 @@
         <template slot-scope="scope">
           <!-- <i class="el-icon-view icons"></i> -->
           <i @click="changes(scope.$index)" class="el-icon-edit icons"></i>
+          <i @click="upVideos(scope.$index)" class="el-icon-upload2 icons"></i>
           <i @click="del(scope.row.course_id)" class="el-icon-close icons"></i>
         </template>
       </el-table-column>
@@ -54,143 +55,152 @@
     <!-- model -->
     <j-model :model="model" @CLOSE="CLOSE" :title="title">
       <div slot="content">
-        <div class="model-input">
-          <span>一级菜单:</span>
-          <el-select
-            @change="setLd"
-            class="w200"
-            size="mini"
-            v-model="ld1"
-            clearable
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in lists"
-              :key="item.id"
-              :label="item.list_name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="model-input">
-          <span>二级菜单:</span>
-          <el-select
-            class="w200"
-            size="mini"
-            v-model="tabModel.list_id"
-            clearable
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in erlist"
-              :key="item.id"
-              :label="item.list_name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="model-input">
-          <span>类型:</span>
-          <el-select
-            class="w200"
-            size="mini"
-            v-model="tabModel.course_type"
-            clearable
-            placeholder="请选择"
-          >
-            <el-option v-for="item in types" :key="item.val" :label="item.lab" :value="item.val"></el-option>
-          </el-select>
-        </div>
-        <div class="model-input">
-          <span>课程名称:</span>
-          <el-input v-model="tabModel.course_name" class="w200" size="mini" placeholder="课程名称"></el-input>
-        </div>
-        <div class="upBox">
-          <div class="img-txt">图片介绍:</div>
-          <div>
-            <div class="img-box">
-              上传图片
-              <input @change="upladImg($event,1)" type="file">
+        <upvideo :id="id" v-if="videos"></upvideo>
+        <div v-if="!videos">
+          <div class="model-input">
+            <span>一级菜单:</span>
+            <el-select
+              @change="setLd"
+              class="w200"
+              size="mini"
+              v-model="ld1"
+              clearable
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in lists"
+                :key="item.id"
+                :label="item.list_name"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="model-input">
+            <span>二级菜单:</span>
+            <el-select
+              class="w200"
+              size="mini"
+              v-model="tabModel.list_id"
+              clearable
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in erlist"
+                :key="item.id"
+                :label="item.list_name"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="model-input">
+            <span>类型:</span>
+            <el-select
+              class="w200"
+              size="mini"
+              v-model="tabModel.course_type"
+              clearable
+              placeholder="请选择"
+            >
+              <el-option v-for="item in types" :key="item.val" :label="item.lab" :value="item.val"></el-option>
+            </el-select>
+          </div>
+          <div class="model-input">
+            <span>课程名称:</span>
+            <el-input v-model="tabModel.course_name" class="w200" size="mini" placeholder="课程名称"></el-input>
+          </div>
+          <div class="upBox">
+            <div class="img-txt">图片介绍:</div>
+            <div>
+              <div class="img-box">
+                上传图片
+                <input @change="upladImg($event,1)" type="file">
+              </div>
+              <img v-if="tabModel.sketchy_img" :src="$url + tabModel.sketchy_img" alt>
             </div>
-            <img v-if="tabModel.sketchy_img" :src="$url + tabModel.sketchy_img" alt>
+            <div class="img-size">建议尺寸***</div>
           </div>
-          <div class="img-size">建议尺寸***</div>
-        </div>
-        <div class="upBox">
-          <div class="img-txt">课程图片:</div>
-          <div>
-            <div class="img-box">
-              上传图片
-              <input @change="upladImg($event,2)" type="file">
+          <div class="upBox">
+            <div class="img-txt">课程图片:</div>
+            <div>
+              <div class="img-box">
+                上传图片
+                <input @change="upladImg($event,2)" type="file">
+              </div>
+              <img v-if="tabModel.course_img" :src="$url + tabModel.course_img" alt>
             </div>
-            <img v-if="tabModel.course_img" :src="$url + tabModel.course_img" alt>
+            <div class="img-size">建议尺寸***</div>
           </div>
-          <div class="img-size">建议尺寸***</div>
-        </div>
-        <div class="model-input">
-          <span>是否免费:</span>
-          <el-radio @change="freeC" v-model="tabModel.course_free" :label="ones">免费</el-radio>
-          <el-radio @change="freeC" v-model="tabModel.course_free" :label="zeros">付费</el-radio>
-        </div>
-        <div class="model-input">
-          <span>课程价格:</span>
-          <el-input @change="freeD" v-model="tabModel.course_money" class="w200" size="mini" placeholder="价格"></el-input>
-        </div>
-        <div class="model-input">
-          <span>适应人群:</span>
-          <el-input v-model="tabModel.course_adapt" class="w200" size="mini" placeholder="适应人群"></el-input>
-        </div>
-        <div class="model-input">
-          <span>推荐课程:</span>
-          <el-select
-            class="w200"
-            size="mini"
-            v-model="tabModel.Recommend"
-            clearable
-            placeholder="推荐课程"
-          >
-            <el-option
-              v-for="item in classlist"
-              :key="item.course_id"
-              :label="item.course_name"
-              :value="item.course_id"
-              :disabled="item.disabled"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="model-input">
-          <span>老师姓名:</span>
-          <el-select
-            class="w200"
-            size="mini"
-            v-model="tabModel.teacher_id"
-            clearable
-            placeholder="老师姓名"
-          >
-            <el-option
-              v-for="item in tealist"
-              :key="item.teacher_id"
-              :label="item.teacher_name"
-              :value="item.teacher_id"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="model-input">
-          <span>课时:</span>
-          <el-input v-model="tabModel.course_hour" class="w200" size="mini" placeholder="课时"></el-input>
-        </div>
-        <div class="textar">
-          <div class="textar-title">提供服务:</div>
+          <div class="model-input">
+            <span>是否免费:</span>
+            <el-radio @change="freeC" v-model="tabModel.course_free" :label="ones">免费</el-radio>
+            <el-radio @change="freeC" v-model="tabModel.course_free" :label="zeros">付费</el-radio>
+          </div>
+          <div class="model-input">
+            <span>课程价格:</span>
+            <el-input
+              @change="freeD"
+              v-model="tabModel.course_money"
+              class="w200"
+              size="mini"
+              placeholder="价格"
+            ></el-input>
+          </div>
+          <div class="model-input">
+            <span>适应人群:</span>
+            <el-input v-model="tabModel.course_adapt" class="w200" size="mini" placeholder="适应人群"></el-input>
+          </div>
+          <div class="model-input">
+            <span>推荐课程:</span>
+            <el-select
+              class="w200"
+              size="mini"
+              v-model="tabModel.Recommend"
+              clearable
+              placeholder="推荐课程"
+            >
+              <el-option
+                v-for="item in classlist"
+                :key="item.course_id"
+                :label="item.course_name"
+                :value="item.course_id"
+                :disabled="item.disabled"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="model-input">
+            <span>老师姓名:</span>
+            <el-select
+              class="w200"
+              size="mini"
+              v-model="tabModel.teacher_id"
+              clearable
+              placeholder="老师姓名"
+            >
+              <el-option
+                v-for="item in tealist"
+                :key="item.teacher_id"
+                :label="item.teacher_name"
+                :value="item.teacher_id"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="model-input">
+            <span>课时:</span>
+            <el-input v-model="tabModel.course_hour" class="w200" size="mini" placeholder="课时"></el-input>
+          </div>
+          <div class="textar">
+            <div class="textar-title">提供服务:</div>
+            <div>
+              <textarea v-model="tabModel.service" class="textar-content"></textarea>
+            </div>
+          </div>
           <div>
-            <textarea v-model="tabModel.service" class="textar-content"></textarea>
+            <span class="editalk">课程简介:</span>
+            <editor @getEditor="getEditor" :content="course_sketchy"></editor>
           </div>
+          <!-- upBtn -->
+          <el-button class="fs12 upBtns" @click="UP" size="mini" type="primary">提交</el-button>
         </div>
-        <div>
-          <span class="editalk">课程简介:</span>
-          <editor @getEditor="getEditor" :content="course_sketchy"></editor>
-        </div>
-        <!-- upBtn -->
-        <el-button class="fs12 upBtns" @click="UP" size="mini" type="primary">提交</el-button>
       </div>
     </j-model>
   </div>
@@ -228,8 +238,15 @@ export default {
           val: 3,
           lab: "热门"
         }
-      ]
+      ],
+      videos: false,
+      id:''
+
+      //upvideo
     };
+  },
+  components: {
+    upvideo: () => import("./children/upvideo.vue")
   },
   mounted() {
     this.getInfo();
@@ -258,15 +275,16 @@ export default {
     upladImg(event, num) {
       upImg(event).then(res => {
         if (num === 1) {
-          this.$set(this.tabModel, "sketchy_img", res.data.data.path);
+          this.$set(this.tabModel, "sketchy_img", res.data.data.data);
         }
         if (num === 2) {
-          this.$set(this.tabModel, "course_img", res.data.data.path);
+          this.$set(this.tabModel, "course_img", res.data.data.data);
         }
       });
     },
     //open add model
     addClass() {
+      this.videos = false;
       this.tabModel = {};
       this.course_sketchy = null;
       this.add = true;
@@ -317,6 +335,7 @@ export default {
     },
     //修改
     changes(num) {
+      this.videos = false;
       this.add = false;
       this.title = "修改课程信息";
       this.tabModel = JSON.parse(JSON.stringify(this.list[num]));
@@ -343,30 +362,36 @@ export default {
     },
     //删除
     del(id) {
-      _api.delCourse({ course_id:id })
-      .then(res=>{
-        if(res.data.code === 200){
+      _api.delCourse({ course_id: id }).then(res => {
+        if (res.data.code === 200) {
           this.$DIY(res.data.msg);
           // this.CLOSE();
-          this.getInfo()
+          this.getInfo();
         }
-      })
+      });
     },
     freeC() {
-      console.log(this.tabModel)
-      if(this.tabModel.course_free === 1){
-          this.$set(this.tabModel,'course_money',0)
-        }
+      console.log(this.tabModel);
+      if (this.tabModel.course_free === 1) {
+        this.$set(this.tabModel, "course_money", 0);
+      }
     },
     freeD() {
-      if(this.tabModel.course_money > 0){
-        this.$set(this.tabModel,'course_free',0)
-      }
-      else{
-        this.$set(this.tabModel,'course_free',1)
-
+      if (this.tabModel.course_money > 0) {
+        this.$set(this.tabModel, "course_free", 0);
+      } else {
+        this.$set(this.tabModel, "course_free", 1);
       }
     },
+
+    //up video
+    upVideos(num) {
+      this.title = '添加章节并上传视频';
+      this.videos = true;
+      this.CLOSE();
+      console.log(this.list[num])
+      this.id = this.list[num].course_id;
+    }
   }
 };
 </script>

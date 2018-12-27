@@ -103,7 +103,7 @@ export default {
     //上传图片
     upladImg(event, num) {
       upImg(event).then(res => {
-        this.$set(this.tabModel, "head_img", res.data.data.path);
+        this.$set(this.tabModel, "head_img", res.data.data.data);
       });
     },
     //open changes model
