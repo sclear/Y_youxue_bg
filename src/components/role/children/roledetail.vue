@@ -86,6 +86,7 @@ export default {
         for (let i = 0; i < obj.length; i++) {
           obj[i].chose = false;
         }
+        console.log(obj)
         this.menu = obj;
         console.log(this.menu);
       });
@@ -119,11 +120,13 @@ export default {
         }
       } else {
         let arr = [];
+        console.log(this.menu)
         for (let i = 0; i < this.menu.length; i++) {
           if (this.menu[i].chose === true) {
-            arr.push(this.menu[i].menu_id);
+            arr.push(this.menu[i].id);
           }
         }
+        console.log(arr)
         _api
           .setPower({
             role_id: this.tabModel.role_id,

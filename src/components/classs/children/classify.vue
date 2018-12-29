@@ -293,6 +293,24 @@ export default {
     },
     //提交
     UP() {
+      console.log(this.tabModel)
+      if(
+        !this.tabModel.Recommend ||
+        !this.tabModel.course_adapt ||
+        // !this.tabModel.course_free ||
+        !this.tabModel.course_hour ||
+        !this.tabModel.course_img ||
+        // !this.tabModel.course_money ||
+        !this.tabModel.course_name ||
+        !this.course_sketchy ||
+        // !this.tabModel.course_type ||
+        // !this.tabModel.list_id ||
+        !this.tabModel.sketchy_img ||
+        !this.tabModel.teacher_id
+        // !this.tabModel.service
+        ) {
+        return this.$DIY('请完善信息')
+      }
       if (this.add) {
         let obj = this.tabModel;
         obj.course_sketchy = this.course_sketchy;

@@ -10,7 +10,7 @@
       <hr>
 
       <div class="model-input mt10">
-        <span>选择分类:</span>
+        <span>选择章节:</span>
         <el-select size="mini" v-model="fnname" clearable placeholder="请选择">
           <el-option
             v-for="item in list"
@@ -30,14 +30,14 @@
       </div>
       <div class="model-input mt10">
         <span>视频地址:</span>
-        <el-input v-model="videoadr" class="w200" size="mini" placeholder="视频地址"></el-input>
+        <el-input v-model="vurl" class="w200" size="mini" placeholder="视频地址"></el-input>
       </div>
       <div class="upBox">
         <div class="img-txt">上传视频</div>
         <div>
           <div class="img-box">
             上传视频
-            <input @change="upladVideo($event)" type="file">
+            <input @change="uploadVideo($event)" type="file">
           </div>
         </div>
       </div>
@@ -48,17 +48,18 @@
             上传图片
             <input @change="upladImg($event)" type="file">
           </div>
+          <img :src="$url + iurl" alt>
         </div>
         <div class="img-size">建议大小</div>
       </div>
-      <el-button class="upBtn" size="mini" type="primary">提交</el-button>
+      <el-button @click="UPMID" class="upBtn ups" size="mini" type="primary">提交</el-button>
 
       <hr>
     </div>
     <div v-for="(item,index) in list" :key="index" class="model-card">
       <div class="card-header">
         {{item.chapter_name}}
-        <i class="el-icon-close"></i>
+        <i @click="delClass(index)" class="el-icon-close"></i>
       </div>
       <div class="card-body">
         <div v-for="(items,indexs) in item.children" :key="indexs" class="content-body">
@@ -79,6 +80,7 @@
           <div class="model-titles">
             <span>视频地址:</span>
             <el-input
+              disabled
               size="mini"
               class="w130"
               placeholder="请输入内容"
@@ -90,29 +92,32 @@
             <span class="span-box fl colo">.</span>
             <img class="fl" :src="$url + items.video_img" alt>
           </div>
-          <el-button class="centers" size="mini" type="primary">提交</el-button>
-          <el-button class="centers" size="mini" type="danger">删除</el-button>
+          <el-button @click="UPLAR(index,indexs)" class="centers" size="mini" type="primary">提交</el-button>
+          <el-button @click="dellar(index,indexs)" class="centers" size="mini" type="danger">删除</el-button>
         </div>
       </div>
     </div>
+
+    <!-- 视频上传shade -->
+    <shade :progress="progress"></shade>
   </div>
 </template>
 
 <script>
 import _api from "./../../../../api/baseUrl.js";
 import mixin from "./../../../../util/mixin.js";
-import { upImg,upVideo } from "./../../../../util/tool.js";
+import { upImg, upVideo } from "./../../../../util/tool.js";
 export default {
   mixins: [mixin],
   props: ["id"],
   data() {
     return {
       serch: false,
-      fnname:'',
-      videoname:'',
-      videoadr:'',
-      iurl:'',
-      vurl:'',
+      fnname: "",
+      videoname: "",
+      videoadr: "",
+      iurl: "",
+      vurl: "",
 
       txt: 12,
       options: [
@@ -144,6 +149,9 @@ export default {
   mounted() {
     console.log(this.id);
     this.getInfo();
+    if (this.getInfo) {
+      console.log(1);
+    }
   },
 
   methods: {
@@ -152,6 +160,15 @@ export default {
         console.log(res);
         let obj = res.data.data[0].children;
         console.log(this.list);
+        console.log(obj);
+        try {
+          if (obj === undefined) {
+            console.log("jinrule");
+            obj = [];
+          }
+        } catch (err) {}
+        // }
+        // console.log(obj)
         for (let i = 0; i < obj.length; i++) {
           // for(let j = 0;j < obj[i].children.length;j++){
           //   console.log(obj[i].children[j].video_type)
@@ -165,10 +182,10 @@ export default {
                 : (obj[i].children[j].video_type = false);
             }
           } catch (err) {
-            obj[i].children=[]
+            obj[i].children = [];
           }
         }
-        console.log(obj)
+        console.log(obj);
         this.list = obj;
       });
     },
@@ -186,23 +203,101 @@ export default {
           }
         });
     },
+    //上传图片
     upladImg(event) {
       upImg(event).then(res => {
-        if (num === 2) {
-          // this.$set(this.tabModel, "course_img", res.data.data.data);
+        console.log(res);
+        this.iurl = res.data.data.data;
+        // this.$set(this.tabModel, "course_img", res.data.data.data);
+      });
+    },
+    //上传视频
+    uploadVideo(event) {
+      upVideo(event, this.UPVIDEO).then(res => {
+        console.log(res);
+        this.vurl = res.data.data.data;
+        // this.$set(this.tabModel, "sketchy_img", res.data.data.data);
+      });
+    },
+    //添加视频
+    UPMID() {
+      if(!this.videoname || !this.vurl || !this.serch || !this.fnname || !this.iurl){
+        return this.$DIY('请完善添加信息')
+      }
+      let obj = {
+        class_hour: this.videoname,
+        video_url: this.vurl,
+        video_type: this.serch === true ? 0 : 1,
+        chapter_id: this.fnname,
+        video_img: this.iurl
+      };
+      console.log(obj);
+      _api.addVideo({ data: obj }).then(res => {
+        if (res.data.code === 200) {
+          this.$DIY(res.data.msg);
+          this.getInfo();
         }
       });
     },
-    upladVideo(event) {
-      upVideo(event).then(res => {
-        console.log(res)
-          // this.$set(this.tabModel, "sketchy_img", res.data.data.data);
-
-      });
+    //修改视频信息
+    UPLAR(inx, inxs) {
+      // if(!)
+      _api
+        .upVideos({
+          id: this.list[inx].children[inxs].id,
+          data: {
+            video_type:
+              this.list[inx].children[inxs].video_type === true ? 0 : 1,
+            class_hour: this.list[inx].children[inxs].class_hour
+          }
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$DIY(res.data.msg);
+            this.getInfo();
+          }
+        });
+      console.log(this.list[inx].children[inxs]);
     },
-    // upladVideo
-  },
-  components: {}
+    //删除视频
+    dellar(inx, inxs) {
+      this.$confirm("此操作将永久删除该视频, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          _api
+            .delIDVideo({
+              id: this.list[inx].children[inxs].id
+            })
+            .then(res => {
+              if (res.data.code === 200) {
+                this.$DIY(res.data.msg);
+                this.getInfo();
+              }
+            });
+        })
+        .catch();
+    },
+    //删章节
+    delClass(num) {
+      this.$confirm("此操作将永久删除该章节, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          _api.delChapter({ chapter_id: this.list[num].id }).then(res => {
+            if (res.data.code === 200) {
+              this.$DIY(res.data.msg);
+              this.getInfo();
+            }
+          });
+        })
+        .catch();
+    }
+  }
 };
 </script>
 
@@ -216,5 +311,9 @@ hr {
 }
 .colo {
   color: white;
+}
+.ups {
+  margin-top: 15px !important;
+  margin-bottom: 0 !important;
 }
 </style>

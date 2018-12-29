@@ -9,9 +9,12 @@ class api  {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/add`,data,1)
     }
     //上传视频
-    upvideo(data) {
-        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/video`,data,1)
+    upvideo(data,el) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/video`,data,el)
     }
+    // upvideo(data,el) {
+    //     return fetch('post','https://jsonplaceholder.typicode.com/posts/',data,el)
+    // }
     //上传图片
     aaa(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Uploader/aaa`,data,1)
@@ -19,6 +22,10 @@ class api  {
     //获取用户信息
     getAdminUser(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Adminuser/getAdminUser`,data)
+    }
+    //获登录获取用户权限
+    adminLogin(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Adminlogin/adminLogin`,data)
     }
 
     //获取用户信息
@@ -264,6 +271,22 @@ class api  {
     //课程id查章节视频
     getCoursess(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Course/getCoursess`,data)
+    }
+    //删除视频
+    delIDVideo(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Video/delIDVideo`,data)
+    }
+    //删除分类
+    delChapter(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Chapter/delChapter`,data)
+    }
+    //修改视频信息
+    upVideos(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Video/upVideo`,data)
+    }
+    //修改视频信息
+    addVideo(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/Video/addVideo`,data)
     }
 }
 

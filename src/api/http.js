@@ -19,32 +19,44 @@ import qs from 'qs'
 //     return Promise.reject(error);
 // });
 
+/**
+ * 
+ * @param {*} method 
+ * @param {*} url 
+ * @param {*} data 
+ * @param {*} sum  number 上传图片格式     function 为显示进度条传递的回调函数
+ */
 
 
 const fetch = (method, url, data, sum) => {
     let obj;
     if (sum) {
-        obj = {
-            method: method,
-            url: url,
-            data: data,
-            params: data,
-            onUploadProgress: function (progressEvent) {
-                console.log(progressEvent)
-                // 使用本地 progress 事件做任何你想要做的
-            },
-            
+        if (typeof sum === 'number') {
+            obj = {
+                method: method,
+                url: url,
+                data: data,
+                params: data,
+            }
+        } else {
+            obj = {
+                method: method,
+                url: url,
+                data: data,
+                params: data,
+                onUploadProgress: function (progressEvent) {
+                    sum(progressEvent.loaded / progressEvent.total * 100 | 0)
+                },
+
+            }
         }
+
     } else {
         obj = {
             method: method,
             url: url,
             data: qs.stringify(data),
             params: qs.stringify(data),
-            // onUploadProgress: function (progressEvent) {
-            //     console.log(progressEvent)
-            //     // 使用本地 progress 事件做任何你想要做的
-            // },
         }
     }
 

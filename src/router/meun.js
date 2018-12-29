@@ -1,8 +1,10 @@
-import child from './child'
+// 该文件仅仅作为数据传递给Vuex
 export default [
     {
         path: '/',
-        redirect: { path: '/page/home' }
+        // redirect: { path: '/page/home' }
+        component: resolve => require(['@/components/welcome/welcome'], resolve),
+
     },
     {
         path: '/page/home',
@@ -11,10 +13,6 @@ export default [
         component: resolve => require(['@/components/home/home'], resolve),
         redirect: { path: '/page/home/alls' },
         children: [
-            // {
-            //     path: '/',
-            //     redirect: { path:'/page/home/alls' }
-            // },
             {
                 path: 'alls',
                 component: resolve => require(['@/components/home/children/alls'], resolve),
@@ -32,14 +30,6 @@ export default [
                 component: resolve => require(['@/components/home/children/nav'], resolve),
             },
         ]
-    },
-    {
-        path: '/page/role',
-        title: '权限管理',
-        icon: '\ue616',
-        component: resolve => require(['@/components/role/role'], resolve),
-        redirect: { path: '/page/role/user' },
-        children: [...child]
     },
     {
         path: '/page/member',
@@ -133,6 +123,23 @@ export default [
             {
                 path: 'test',
                 component: resolve => require(['@/components/test/children/tests'], resolve),
+            }
+        ]
+    },
+    {
+        path: '/page/role',
+        title: '权限管理',
+        icon: '\ue616',
+        component: resolve => require(['@/components/role/role'], resolve),
+        redirect: { path: '/page/role/user' },
+        children: [
+            {
+                path: 'user',
+                component: resolve => require(['@/components/role/children/user'], resolve),
+            },
+            {
+                path:'roledetail',
+                component: resolve => require(['@/components/role/children/roledetail'], resolve),
             }
         ]
     },

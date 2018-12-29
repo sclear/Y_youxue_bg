@@ -3,7 +3,7 @@
     <el-select @change="getInfo" size="mini" v-model="shows" clearable placeholder="请选择">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
-    <el-input v-model="serch" class="w200" size="mini" placeholder="用户名"></el-input>
+    <el-input v-model="serch" class="w200" size="mini" placeholder="分类名称"></el-input>
     <el-button @click="TOPSERCH" class="fs12" size="mini" type="primary">查询</el-button>
     <!-- 分页 -->
     <el-pagination

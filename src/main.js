@@ -16,9 +16,11 @@ Vue.use(_globalComponts)
 import plugin from './plugin/plugin'
 Vue.use(plugin)
 /* eslint-disable no-new */
+import store from './store/index'
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

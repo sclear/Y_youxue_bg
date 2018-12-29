@@ -2,7 +2,7 @@
   <div class="menu">
     <router-link
       v-if="item.title"
-      v-for="(item,index) in $router.options.routes[0].children"
+      v-for="(item,index) in menu"
       :key="index"
       :to="item.path"
       tag="div"
@@ -10,18 +10,42 @@
       active-class="chose"
     >
       <i class="iconfont">{{item.icon}}</i>
-      <!-- <i class="iconfont">&#xe658;</i> -->
       <span>{{item.title}}</span>
     </router-link>
-
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {};
   },
+  mounted() {
+    // console.log(JSON.parse(localStorage.getItem('s_menu')))
+    // this.$router.addRoutes(JSON.parse(localStorage.getItem('s_menu')))
+    // this.$router.addRoutes([
+    //     {
+    //       path: "/page",
+    //       component: resolve => require(["@/components/page"], resolve),
+    //       children: [{
+    //           path: "/",
+    //           component: resolve => require(["@/components/home/home"], resolve)
+    //         }]
+    //     }
+    // ]);
+    // JSON.parse(localStorage.getItem('s_menu'))
+
+    this.autoLogin()
+  },
+  computed: {
+    ...mapState("login", {
+      menu: state => state.main[0].children
+    })
+  },
+  methods: {
+    ...mapMutations("login", ["autoLogin"])
+  }
 };
 </script>
 
@@ -40,7 +64,7 @@ export default {
     i {
       width: 50px;
       text-align: center;
-      margin:0 15px;
+      margin: 0 15px;
     }
     &:hover {
       color: @bartxt;

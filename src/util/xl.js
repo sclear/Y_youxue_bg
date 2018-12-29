@@ -33,4 +33,10 @@ const zh = (res)=>{
     console.log(newarr)
 }
 
-export default zh
+// export default zh
+
+
+
+
+import Vue from 'vue'
+export default new Vue();

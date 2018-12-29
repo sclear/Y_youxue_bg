@@ -3,19 +3,17 @@
       <img src='https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif' alt=''>
   </div>
 </template>
-
 <script>
-// import xl from './../util/xl.js'
+import { mapActions } from 'vuex'
 export default {
   data() {
-    return {
-    }
+    return {}
   },
   mounted () {
- 
+      this.SETMENUS()
   },
-  components: {
-
+  methods: {
+      ...mapActions('login',['SETMENUS'])
   }
 }
 </script>
@@ -24,9 +22,7 @@ export default {
 .login{
     width:100%;
     height: 100%;
-    background: #64d9d6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: @login;
+    .aligncenter;
 }
 </style>
