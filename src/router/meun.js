@@ -144,6 +144,19 @@ export default [
         ]
     },
     {
+        path: '/page/sys',
+        title: '系统消息',
+        icon: '\ue63a',
+        component: resolve => require(['@/components/sys/sys'], resolve),
+        redirect: { path:'/page/sys/sys' },
+        children: [
+            {
+                path: 'sys',
+                component: resolve => require(['@/components/sys/children/sysa'], resolve),
+            },
+        ]
+    },
+    {
         path: '/public',
         title: '共有',
         icon: '\ue63a',

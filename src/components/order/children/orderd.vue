@@ -58,11 +58,11 @@ export default {
       options: [
         {
           value: 0,
-          label: "已支付"
+          label: "未支付"
         },
         {
           value: 1,
-          label: "未支付"
+          label: "已支付"
         }
       ],
       selectTxt: 0

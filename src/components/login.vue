@@ -10,7 +10,10 @@ export default {
     return {}
   },
   mounted () {
-      this.SETMENUS()
+      setTimeout(()=>{
+          this.SETMENUS()
+      },2000)
+      
   },
   methods: {
       ...mapActions('login',['SETMENUS'])

@@ -1,7 +1,7 @@
 <template>
   <div class="user">
-    <el-input class="w200" size="mini" placeholder="用户名"></el-input>
-    <el-button class="fs12" size="mini" type="primary">查询</el-button>
+    <!-- <el-input class="w200" size="mini" placeholder=""></el-input>
+    <el-button class="fs12" size="mini" type="primary">查询</el-button> -->
     <el-button class="fs12" @click="addSWIPER" size="mini" type="primary">添加轮播图</el-button>
     <!-- <el-pagination
       size="small"

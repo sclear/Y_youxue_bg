@@ -16,7 +16,11 @@ export default new Router({
     },
     {
       path: '/',
+      // component: resolve => require(['@/components/page'], resolve),
+      // redirect: { path:'/page/home' },
+      // children:[...menu]
       component: resolve => require(['@/components/login'], resolve)
+
     },
     {
       path: '*',

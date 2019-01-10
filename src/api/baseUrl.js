@@ -288,6 +288,10 @@ class api  {
     addVideo(data) {
         return fetch('post',`${ipUrl}/kxk01yx_ierdh/Video/addVideo`,data)
     }
+    //发送系统消息
+    addUserNews(data) {
+        return fetch('post',`${ipUrl}/kxk01yx_ierdh/News/addUserNews`,data)
+    }
 }
 
 

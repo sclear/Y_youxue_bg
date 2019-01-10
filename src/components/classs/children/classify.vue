@@ -32,7 +32,7 @@
       <el-table-column align="center" prop="update_time" label="更新时间" show-overflow-tooltip>
         <template slot-scope="scope">{{scope.row.update_time | _ymd}}</template>
       </el-table-column>
-      <el-table-column align="center" prop="Number" label="学习人数" show-overflow-tooltip></el-table-column>
+      <el-table-column align="center" prop="Number" label="播放量" show-overflow-tooltip></el-table-column>
       <el-table-column align="center" prop="sell_type" label="是否上架" show-overflow-tooltip>
         <template slot-scope="scope">
           <i
